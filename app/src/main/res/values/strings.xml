@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">逼乎</string>
+    <string name="home_title_text">我想知道...</string>
+    <string name="collection">收藏</string>
+    <string name="real_time_yq">实时疫情</string>
+    <string name="recommend">推荐</string>
+    <string name="day">day</string>
+    <string name="date">date</string>
+    <string name="home">首页</string>
+    <string name="add_question">提问</string>
+    <string name="mine">我的</string>
+    <string name="about_me">
+        "为了这次作业，\n"
+        "我前前后后花了20天的时间来完成\n"
+        "从重新认识Android，反反复复的看《第一行代码》\n"
+        "到编写一个个只实现一部分小功能的测试程序\n"
+        "我收获了许多，为了实现一个功能，为了解决一个bug\n"
+        "CSDN的收藏夹也渐渐装得越来越满\n"
+        "解决一个问题可能需要收集十几篇文章，上几个博客\n"
+        "当然解决问题的过程是辛苦的，但最后解决了那过程也就过去了\n\n"
+        "同时也有一些问题没有成功解决\n"
+        "让我苦恼了许久，大量的删改代码，最后却没有效果\n"
+        "不过部分代码也因此变得更加规范，也不算完败\n\n"
+        "然后再说说设计的思路:\n"
+        "设计思路很关键！非常关键！\n"
+        "它将决定你的代码写道后面是否轻松\n"
+        "设计思路最初应看得大，看的广\n"
+        "我认为\n"
+        "应从一个粗糙骨感的框架，到一个精致丰满的程序\n"
+        "这样思路是向外发散，而不会越写越窄\n"
+        "最后把自己禁锢起来\n"
+    </string>
+</resources>

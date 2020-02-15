@@ -1,0 +1,239 @@
+package com.seven749.rainbowbihu;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+public class QuestionOpenedActivity extends BaseActivity {
+    private TextView textTitle,textContent, textDate, textAuthor;
+    private Button buttonAddCollection, buttonSendAnswer;
+    private EditText editContentA;
+    private String lastUrl, contentA;
+    private Map<String, Object> hashMapFavorite, hashMapAnswer, hashMapSend;
+    private List<Answer> answerList = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_question_opened);
+        Intent intent = getIntent();
+        final String qid = intent.getStringExtra("qid");
+        String title = intent.getStringExtra("title");
+        final String content = intent.getStringExtra("content");
+        String images = intent.getStringExtra("images");
+        String author = intent.getStringExtra("author");
+        String date = intent.getStringExtra("date");
+
+        textTitle = (TextView) findViewById(R.id.show_title_q);
+        textContent = (TextView) findViewById(R.id.show_content_q);
+        textDate = (TextView) findViewById(R.id.show_date_q);
+        textAuthor = (TextView) findViewById(R.id.show_author_q);
+        textTitle.setText(title);
+        textContent.setText(content);
+        textDate.setText(date);
+        textAuthor.setText(author);
+        buttonAddCollection = (Button) findViewById(R.id.add_collection);
+        buttonSendAnswer = (Button) findViewById(R.id.button_send_answer);
+        editContentA = (EditText) findViewById(R.id.edit_answer);
+        if (MainActivity.isCollection) {
+            buttonAddCollection.setBackgroundResource(R.color.colorGery);
+            buttonAddCollection.setText("已收藏");
+            buttonAddCollection.setTextColor(buttonAddCollection.getResources().getColor(R.color.colorBlack));
+        }
+        initAnswer(qid);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.answer_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        AnswerAdapter adapter = new AnswerAdapter(QuestionOpenedActivity.this, answerList);
+        recyclerView.setAdapter(adapter);
+        buttonSendAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contentA = editContentA.getText().toString();
+                if (!contentA.equals("")) {
+                    lastUrl = "answer.php";
+                    hashMapSend = new HashMap<String, Object>() {{
+                        put("qid", qid);
+                        put("content", contentA);
+                        put("images", "");
+                        put("token", MainActivity.token);
+                    }};
+                    MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapSend, new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.body().string());
+                                final String status =  jsonObject.getString("status");
+                                final String info = jsonObject.getString("info");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (status.equals("200")) {
+                                            Toast.makeText(QuestionOpenedActivity.this, "回答成功",
+                                                    Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(QuestionOpenedActivity.this, info + "回答失败...",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        buttonAddCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hashMapFavorite = new HashMap<String, Object>() {{
+                    put("qid", qid);
+                    put("token", MainActivity.token);
+                }};
+                if (MainActivity.isCollection) {
+                    lastUrl = "cancelFavorite.php";
+                    MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapFavorite, new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            try {
+                                JSONObject object = new JSONObject(response.body().string());
+                                final String status = object.getString("status");
+                                if (status.equals("200")) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            buttonAddCollection.setVisibility(View.GONE);
+                                            Toast.makeText(QuestionOpenedActivity.this, "已取消",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } else {
+                    lastUrl = "favorite.php";
+                    MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapFavorite, new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            try {
+                                JSONObject object = new JSONObject(response.body().string());
+                                final String status = object.getString("status");
+                                if (status.equals("200")) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            buttonAddCollection.setVisibility(View.GONE);
+                                            Toast.makeText(QuestionOpenedActivity.this, "已收藏",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+    private void initAnswer(final String qid) {
+        lastUrl = "getAnswerList.php";
+        hashMapAnswer = new HashMap<String, Object>() {{
+            put("page", 0);
+            put("count", 20);
+            put("qid",qid);
+            put("token", MainActivity.token);
+        }};
+        MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapAnswer, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                try {
+                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    final String status = jsonObject.getString("status");
+                    final String info = jsonObject.getString("info");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (status.equals("200")) {
+                                try {
+                                    JSONArray jsonArray = new JSONArray(jsonObject.getJSONObject("data").get("answers").toString());
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject jsonAnswer = jsonArray.getJSONObject(i);
+                                        final String contentA = jsonAnswer.getString("content");
+                                        final String imagesA = jsonAnswer.getString("images");
+                                        final String dateA = jsonAnswer.getString("date");
+                                        final String authorNameA = jsonAnswer.getString("authorName");
+                                        Answer answer = new Answer(contentA, dateA, authorNameA);
+                                            answerList.add(answer);
+                                    }
+                                    Toast.makeText(QuestionOpenedActivity.this, "刷新成功！",
+                                            Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                Toast.makeText(QuestionOpenedActivity.this, info + "，刷新失败...",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+}
