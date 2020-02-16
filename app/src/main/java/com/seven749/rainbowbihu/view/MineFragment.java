@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.seven749.rainbowbihu.control.AboutMeActivity;
+import com.seven749.rainbowbihu.control.LoginActivity;
+import com.seven749.rainbowbihu.control.MainActivity;
+import com.seven749.rainbowbihu.control.PasswordActivity;
+import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.R;
 
 public class MineFragment extends Fragment implements View.OnClickListener{
 

@@ -1,10 +1,12 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.control;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.seven749.rainbowbihu.R;
 
 import org.json.JSONObject;
 

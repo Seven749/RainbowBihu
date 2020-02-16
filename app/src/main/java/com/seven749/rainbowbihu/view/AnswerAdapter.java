@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.model.Answer;
 
 import java.util.List;
 

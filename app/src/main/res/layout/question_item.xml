@@ -4,43 +4,65 @@
     android:layout_height="wrap_content"
     android:background="@color/colorGeryWhite">
 
-    <TextView
-        android:id="@+id/text_title_q"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:lines="1"
-        android:ellipsize="end"
-        android:paddingLeft="20dp"
-        android:text="Question Title"
-        android:textSize="20sp"
-        android:textColor="@color/colorBlack"/>
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="45dp" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <TextView
+            android:id="@+id/text_title_q"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="Question Title"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"/>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/avatar_q"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_round"/>
+
+            <TextView
+                android:id="@+id/author_q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avatar"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
         <TextView
             android:id="@+id/text_content_q"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_weight="1"
             android:lines="2"
             android:ellipsize="end"
-            android:paddingLeft="20dp"
             android:text="Question Content "
             android:textSize="16sp"
             android:textColor="@color/colorBlack"/>
 
+        <TextView
+            android:id="@+id/text_date_q"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:paddingLeft="20dp"
+            android:text="xxxx-xx-xx xx:xx:xx"
+            android:textSize="12sp"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_date_q"
-        android:layout_width="match_parent"
-        android:layout_height="18dp"
-        android:paddingLeft="20dp"
-        android:text="xxxx-xx-xx xx:xx:xx"
-        android:textSize="12sp"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="10dp"

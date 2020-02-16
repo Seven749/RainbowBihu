@@ -1,9 +1,7 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.control.QuestionOpenedActivity;
+import com.seven749.rainbowbihu.model.Question;
+import com.seven749.rainbowbihu.uitl.MyUtil;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
+import java.util.List;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
     private List<Question> mQuestionList;
@@ -24,8 +25,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View questionView;
-        TextView qTitle, qContent, qDate;
-        ImageView qImages;
+        TextView qTitle, qContent, qDate, qAuthor;
+        ImageView qImages, qAvatar;
 
         public  ViewHolder(View view) {
             super(view);
@@ -33,6 +34,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             qTitle = (TextView) view.findViewById(R.id.text_title_q);
             qContent = (TextView) view.findViewById(R.id.text_content_q);
             qDate = (TextView) view.findViewById(R.id.text_date_q);
+            qAuthor = (TextView) view.findViewById(R.id.author_q);
+            qAvatar = (ImageView) view.findViewById(R.id.avatar_q);
         }
     }
     public QuestionAdapter(Context context, List<Question> questionList) {
@@ -46,6 +49,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         holder.qTitle.setText(question.getTitle());
         holder.qContent.setText(question.getContent());
         holder.qDate.setText(question.getDate());
+        holder.qAuthor.setText(question.getAuthorName());
+        holder.qAvatar.setImageBitmap(MyUtil.getURLImage(question.getAvatar()));
         holder.questionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,13 +60,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                 String images = question.getImage();
                 String author = question.getAuthorName();
                 String date = question.getDate();
-                Intent intent = new Intent(context,QuestionOpenedActivity.class);
+                boolean isF = question.getIsF();
+                Intent intent = new Intent(context, QuestionOpenedActivity.class);
                 intent.putExtra("qid", qid);
                 intent.putExtra("title", title);
                 intent.putExtra("content", content);
                 intent.putExtra("images", images);
                 intent.putExtra("author", author);
                 intent.putExtra("date", date);
+                intent.putExtra("isF", isF);
                 context.startActivity(intent);
             }
         });

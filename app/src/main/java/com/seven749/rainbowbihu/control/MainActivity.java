@@ -1,21 +1,16 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.control;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -25,6 +20,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.seven749.rainbowbihu.uitl.DoubleClickExitHelper;
+import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.view.HomeFragment;
+import com.seven749.rainbowbihu.view.MineFragment;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private  Button buttonCollection, buttonRecommend;
@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private TextView textHome, textMine;
     private LinearLayout titleLayout;
     private DoubleClickExitHelper doubleClickExitHelper = new DoubleClickExitHelper(MainActivity.this);
+    private MineFragment mineFragment = new MineFragment();
     public static String password;
     public static final String baseUrl = "http://bihu.jay86.com/";
     public static String token, username;
@@ -143,7 +144,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 buttonMine.setBackgroundResource(R.drawable.ic_mine_blue);
                 textMine.setTextColor(textMine.getResources().getColor(R.color.colorBlue));
                 titleLayout.setVisibility(View.GONE);
-                replaceFragmentHome(new MineFragment());
+                replaceFragmentHome(mineFragment);
                 break;
             case R.id.button_home:
                 buttonHome.setBackgroundResource(R.drawable.ic_home_blue);

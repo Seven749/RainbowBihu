@@ -1,10 +1,7 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.control;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.webkit.CookieManager;
@@ -12,6 +9,8 @@ import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.seven749.rainbowbihu.R;
 
 public class RealTimeYQActivity extends BaseActivity {
 

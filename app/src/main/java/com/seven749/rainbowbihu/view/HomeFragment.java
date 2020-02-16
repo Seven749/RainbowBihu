@@ -1,5 +1,7 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.view;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.seven749.rainbowbihu.control.MainActivity;
+import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.model.Question;
+import com.seven749.rainbowbihu.R;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -35,6 +42,7 @@ public class HomeFragment extends Fragment {
     private List<Question> questionListC = new ArrayList<>();
     private Map<String, Object> postData;
     private RecyclerView recyclerView;
+    public static QuestionAdapter adapter;
 
 
     @Nullable
@@ -42,8 +50,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         if (MainActivity.isLogin) {
-            initQuestion();
-            QuestionAdapter adapter;
+            initQuestion(getActivity(), getContext());
             if (MainActivity.isCollection) {
                 adapter = new QuestionAdapter(getContext(),questionListC);
             }else {
@@ -68,7 +75,7 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "onViewCreated: ");
     }
 
-    private void initQuestion() {
+    public void initQuestion(final Activity activity, Context context) {
 /* 随机数
         final long l = System.currentTimeMillis();
         final int i = (int) (l % 11);
@@ -80,8 +87,10 @@ public class HomeFragment extends Fragment {
         }};
         if (MainActivity.isCollection) {
             lastUrl = "getFavoriteList.php";
+            questionListC.clear();
         } else {
             lastUrl = "getQuestionList.php";
+            questionList.clear();
         }
         MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, postData, new Callback() {
             @Override
@@ -96,7 +105,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void parseJSON(String jsonData) {
+    private  void parseJSON(String jsonData) {
         try {
             final JSONObject jsonObject = new JSONObject(jsonData);
             final String status = jsonObject.getString("status");
@@ -116,11 +125,16 @@ public class HomeFragment extends Fragment {
                                 final String imagesQ = jsonQuestion.getString("images");
                                 final String dateQ = jsonQuestion.getString("date");
                                 final String authorNameQ = jsonQuestion.getString("authorName");
-                                Question question = new Question(idQ, titleQ, contentQ, imagesQ, dateQ, authorNameQ);
+                                final String avatarQ = jsonQuestion.getString("authorAvatar");
                                 if (MainActivity.isCollection) {
+                                    Question question = new Question(idQ, titleQ, contentQ, imagesQ, dateQ, authorNameQ, avatarQ);
                                     questionListC.add(question);
+                                    adapter.notifyDataSetChanged();
                                 }else {
+                                    final boolean isF = jsonQuestion.getBoolean("is_favorite");
+                                    Question question = new Question(idQ, titleQ, contentQ, imagesQ, dateQ, authorNameQ, avatarQ,isF);
                                     questionList.add(question);
+                                    adapter.notifyDataSetChanged();
                                 }
                             }
                             Toast.makeText(getContext(), "刷新成功！",

@@ -1,15 +1,16 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.control;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.R;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;

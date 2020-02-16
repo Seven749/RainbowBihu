@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+
+import com.seven749.rainbowbihu.R;
 
 public class YQTitle extends LinearLayout implements View.OnClickListener{
     public YQTitle(Context context, @Nullable AttributeSet attrs) {

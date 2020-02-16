@@ -1,8 +1,10 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.control;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.seven749.rainbowbihu.R;
 
 public class AboutMeActivity extends AppCompatActivity {
 

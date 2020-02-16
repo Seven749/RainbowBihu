@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorGeryGeryWhite"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".control.MainActivity"
     tools:showIn="@layout/mine_fragment">
 
     <LinearLayout

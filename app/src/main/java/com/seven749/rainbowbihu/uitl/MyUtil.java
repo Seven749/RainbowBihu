@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.uitl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,12 +32,12 @@ public class MyUtil {
      * @return
      */
 //加载图片
-    public static Bitmap getURLimage(String url) {
+    public static Bitmap getURLImage(String url) {
         Bitmap bmp = null;
         try {
-            URL myurl = new URL(url);
+            URL myUrl = new URL(url);
             // 获得连接
-            HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) myUrl.openConnection();
             conn.setConnectTimeout(6000);//设置超时
             conn.setDoInput(true);
             conn.setUseCaches(false);//不缓存

@@ -1,7 +1,5 @@
-package com.seven749.rainbowbihu;
+package com.seven749.rainbowbihu.view;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -12,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
+import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.control.RealTimeYQActivity;
 
 import java.util.Calendar;
 

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".control.MainActivity"
     android:orientation="vertical">
 
-    <com.seven749.rainbowbihu.YQTitle
+    <com.seven749.rainbowbihu.view.YQTitle
         android:id="@+id/YQTitle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toTopOf="@+id/home_bottom"
         app:layout_constraintTop_toBottomOf="@+id/YQTitle">
 
-        <com.seven749.rainbowbihu.TitleLayout
+        <com.seven749.rainbowbihu.view.TitleLayout
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
