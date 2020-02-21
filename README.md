@@ -2,13 +2,13 @@
 
 # 寒假考核作业-Bihu
 
+    第三次更新更换了数字签名，所以需要卸载重新安装才能更新
+
 ## 一、App简要介绍
 
 ### 一）界面静图
 
 #### 登录界面
-
-![image]( https://github.com/Seven749/RainbowBihu/blob/master/photos/pRes/1login.jpg )
 
 [![1zC7md.md.jpg](https://s2.ax1x.com/2020/02/15/1zC7md.md.jpg)](https://imgchr.com/i/1zC7md)
 
@@ -128,7 +128,11 @@
 
 ###### 工具四：活动管理器--==activityManger==
 
+###### 工具五：判断是否滑动到底部--==isSlideToBottom==
+
 ##### 2）另外封装了一个实现实现双击back键退出程序的工具类：==DoubleClickExitHelper==
+
+##### 3）使用SharedPreferences保存了登录状态
 
 在主界面和登录界面都是使用了==DoubleClickExitHelper==和==MyUtil.finishAll()==实现“再按一次退出应用”
 
