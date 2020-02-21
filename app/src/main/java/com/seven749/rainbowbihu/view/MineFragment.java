@@ -2,6 +2,7 @@ package com.seven749.rainbowbihu.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MineFragment extends Fragment implements View.OnClickListener{
 
@@ -83,7 +86,14 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             case R.id.button_cancel_login:
                 MainActivity.isLogin = false;
                 MainActivity.isCollection = false;
+                MainActivity.username = null;
                 MainActivity.token = null;
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("data", MODE_PRIVATE).edit();
+                editor.putString("username", MainActivity.username);
+                editor.putString("token", MainActivity.token);
+                editor.putBoolean("isLogin", MainActivity.isLogin);
+                editor.putBoolean("isCollection", MainActivity.isCollection);
+                editor.apply();
                 MyUtil.restartApp(getContext());
                 break;
             default:
