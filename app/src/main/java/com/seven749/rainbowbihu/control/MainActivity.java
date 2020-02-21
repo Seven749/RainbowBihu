@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.seven749.rainbowbihu.uitl.DoubleClickExitHelper;
+import com.seven749.rainbowbihu.uitls.DoubleClickExitHelper;
 import com.seven749.rainbowbihu.R;
 import com.seven749.rainbowbihu.view.HomeFragment;
 import com.seven749.rainbowbihu.view.MineFragment;

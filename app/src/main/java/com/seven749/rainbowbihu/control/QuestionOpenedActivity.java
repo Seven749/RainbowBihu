@@ -12,10 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.seven749.rainbowbihu.model.Answer;
-import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
 import com.seven749.rainbowbihu.view.AnswerAdapter;
-import com.seven749.rainbowbihu.view.HomeFragment;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -179,14 +178,14 @@ public class QuestionOpenedActivity extends BaseActivity {
                                         Answer answer = new Answer(contentA, dateA, authorNameA, avatarA);
                                             answerList.add(answer);
                                     }
-                                    Toast.makeText(QuestionOpenedActivity.this, "刷新成功！",
-                                            Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(QuestionOpenedActivity.this, "刷新成功！",
+//                                            Toast.LENGTH_SHORT).show();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 adapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(QuestionOpenedActivity.this, info + "，刷新失败...",
+                                Toast.makeText(QuestionOpenedActivity.this, info + "，获取回答失败...",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

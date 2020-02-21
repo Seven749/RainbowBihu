@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu.uitl;
+package com.seven749.rainbowbihu.uitls;
 
 import android.content.Context;
 import android.os.Handler;

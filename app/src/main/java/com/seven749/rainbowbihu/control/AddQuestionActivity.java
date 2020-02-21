@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
 
 import org.jetbrains.annotations.NotNull;

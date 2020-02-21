@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.seven749.rainbowbihu.uitl.DoubleClickExitHelper;
+import com.seven749.rainbowbihu.uitls.DoubleClickExitHelper;
 import com.seven749.rainbowbihu.R;
 
 import org.json.JSONObject;

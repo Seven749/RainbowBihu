@@ -6,12 +6,27 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="90dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recommend_recycler_view"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_weight="1" >
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommend_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/add_next"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:text="点击加载下一页"-->
+<!--        android:textColor="@color/colorBlueDark"/>-->
 </LinearLayout>

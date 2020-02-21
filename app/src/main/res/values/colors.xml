@@ -10,6 +10,7 @@
     <color name="colorGeryGeryWhite">#EBEBEB</color>
     <color name="colorGeryWhite">#FCFCFC</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlueDark">#0040FF</color>
     <color name="colorBlue">#00AFFF</color>
     <color name="colorBlueWhite">#6FC4FF</color>
 </resources>

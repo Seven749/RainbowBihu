@@ -19,7 +19,7 @@ import com.seven749.rainbowbihu.control.AboutMeActivity;
 import com.seven749.rainbowbihu.control.LoginActivity;
 import com.seven749.rainbowbihu.control.MainActivity;
 import com.seven749.rainbowbihu.control.PasswordActivity;
-import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
 
 public class MineFragment extends Fragment implements View.OnClickListener{

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.seven749.rainbowbihu.uitl.MyUtil;
+import com.seven749.rainbowbihu.uitls.MyUtil;
 
 public class BaseActivity extends AppCompatActivity {
     @Override

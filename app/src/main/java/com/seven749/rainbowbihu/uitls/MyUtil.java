@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu.uitl;
+package com.seven749.rainbowbihu.uitls;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -128,4 +130,16 @@ public class MyUtil {
         activities.clear();
     }
 
+    // 工具五 判断是否底部
+    /**
+     * 判断是否是否滑倒底部
+     * @param recyclerView
+     * @return
+     */
+    public static boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null) return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
+    }
 }
