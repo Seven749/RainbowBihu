@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.seven749.rainbowbihu.R;
-import com.seven749.rainbowbihu.control.RealTimeYQActivity;
 
 import java.util.Calendar;
 

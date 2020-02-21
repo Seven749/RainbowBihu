@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.seven749.rainbowbihu.R;
-import com.seven749.rainbowbihu.control.QuestionOpenedActivity;
 import com.seven749.rainbowbihu.model.Question;
 import com.seven749.rainbowbihu.uitls.MyUtil;
 

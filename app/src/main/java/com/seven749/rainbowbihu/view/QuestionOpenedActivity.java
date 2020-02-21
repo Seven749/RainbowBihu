@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu.control;
+package com.seven749.rainbowbihu.view;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.seven749.rainbowbihu.model.Answer;
 import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
-import com.seven749.rainbowbihu.view.AnswerAdapter;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;

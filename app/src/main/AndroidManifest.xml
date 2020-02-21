@@ -13,21 +13,21 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".control.AboutMeActivity"></activity>
-        <activity android:name=".control.QuestionOpenedActivity" />
-        <activity android:name=".control.AddQuestionActivity" />
+        <activity android:name=".view.AboutMeActivity"></activity>
+        <activity android:name=".view.QuestionOpenedActivity" />
+        <activity android:name=".view.AddQuestionActivity" />
         <activity android:name=".view.HeadPortrait" />
-        <activity android:name=".control.PasswordActivity" />
-        <activity android:name=".control.RegisterActivity" />
+        <activity android:name=".view.PasswordActivity" />
+        <activity android:name=".view.RegisterActivity" />
         <activity
-            android:name=".control.LoginActivity"
+            android:name=".view.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".control.RealTimeYQActivity"
+            android:name=".view.RealTimeYQActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".control.MainActivity"
+            android:name=".view.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>

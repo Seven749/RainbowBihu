@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu.control;
+package com.seven749.rainbowbihu.view;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -24,8 +24,6 @@ import android.widget.TextView;
 
 import com.seven749.rainbowbihu.uitls.DoubleClickExitHelper;
 import com.seven749.rainbowbihu.R;
-import com.seven749.rainbowbihu.view.HomeFragment;
-import com.seven749.rainbowbihu.view.MineFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 

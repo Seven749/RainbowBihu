@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu.control;
+package com.seven749.rainbowbihu.view;
 
 import androidx.appcompat.app.ActionBar;
 

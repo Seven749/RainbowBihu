@@ -15,10 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.seven749.rainbowbihu.control.AboutMeActivity;
-import com.seven749.rainbowbihu.control.LoginActivity;
-import com.seven749.rainbowbihu.control.MainActivity;
-import com.seven749.rainbowbihu.control.PasswordActivity;
 import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
 

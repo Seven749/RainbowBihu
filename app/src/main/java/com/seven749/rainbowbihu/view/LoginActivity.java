@@ -1,4 +1,4 @@
-package com.seven749.rainbowbihu.control;
+package com.seven749.rainbowbihu.view;
 
 import android.content.Intent;
 import android.os.Bundle;
