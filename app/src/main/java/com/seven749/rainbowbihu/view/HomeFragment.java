@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeRefresh;
     public static QuestionAdapter adapter;
     private int getQ = 1, getC = 1;
-    private TextView nextPage;
+//    private TextView nextPage;
 
 
     @Nullable

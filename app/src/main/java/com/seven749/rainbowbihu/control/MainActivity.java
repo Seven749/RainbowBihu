@@ -10,9 +10,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ import com.seven749.rainbowbihu.view.MineFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
+    private static final String TAG = "MainActivity";
     private  Button buttonCollection, buttonRecommend;
     private ImageButton buttonMine, buttonHome, buttonAdd;
     private TextView textHome, textMine;
@@ -37,6 +40,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public static final String baseUrl = "http://bihu.jay86.com/";
     public static String token, username;
     public static boolean isLogin = false, isCollection = false;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+        editor.putString("username", username);
+        editor.putString("token", token);
+        editor.putBoolean("isLogin", isLogin);
+        editor.putBoolean("isCollection", isCollection);
+        editor.apply();
+        Log.d(TAG, "onDestroy: ");
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -58,11 +73,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if (actionBar != null) {
             actionBar.hide();
         }
+        SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
+        username = pref.getString("username", "");
+        token = pref.getString("token", "");
+        isLogin = pref.getBoolean("isLogin", false);
+        isCollection = pref.getBoolean("isCollection", false);
+        Log.d(TAG, "onCreate: username: " + username);
+        Log.d(TAG, "onCreate: token: " + token);
+        Log.d(TAG, "onCreate: isLogin: " + isLogin);
+        Log.d(TAG, "onCreate: isCollection: " + isCollection );
         if (!isLogin) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(intent, 1);
         }
-
         replaceFragmentHome(new HomeFragment());
         titleLayout = (LinearLayout)findViewById(R.id.title);
         textHome = (TextView) findViewById(R.id.text_home);
