@@ -2,6 +2,7 @@ package com.seven749.rainbowbihu.view;
 
 import androidx.appcompat.app.ActionBar;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

@@ -1,6 +1,7 @@
 package com.seven749.rainbowbihu.view;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
