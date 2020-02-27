@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.seven749.rainbowbihu.uitls.DoubleClickExitHelper;
 import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.uitls.httphelper.CallBack;
+import com.seven749.rainbowbihu.uitls.httphelper.NetUtil;
 
 import org.json.JSONObject;
 
@@ -31,7 +33,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText editUsername, editPassword;
     private String username,password;
     private final static String lastUrl = "login.php";
-    private Map<String, String> postDate = new HashMap<>();
+    private Map<String, Object> postDate = new HashMap<>();
     private DoubleClickExitHelper doubleClickExitHelper = new DoubleClickExitHelper(LoginActivity.this);
 
     @Override
@@ -70,7 +72,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     // post login
                     postDate.put("username", username);
                     postDate.put("password", password);
-                    sendRequest();
+                    com.seven749.rainbowbihu.uitls.httphelper.Request request = new com.seven749.rainbowbihu.uitls.httphelper.Request.Builder().url(MainActivity.baseUrl+lastUrl).method("POST").hashMap(postDate).build();
+                    NetUtil.getInstance().execute(request, new CallBack() {
+                        @Override
+                        public void onResponse(String response) {
+                            parseJSON(response);
+                        }
+
+                        @Override
+                        public void onFailed(Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+//                    sendRequest();
                 }
                 break;
             case R.id.to_register:
