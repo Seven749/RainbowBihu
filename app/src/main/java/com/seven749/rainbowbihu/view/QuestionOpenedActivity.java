@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.seven749.rainbowbihu.model.Answer;
 import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.uitls.httphelper.CallBack;
+import com.seven749.rainbowbihu.uitls.httphelper.NetUtil;
+import com.seven749.rainbowbihu.uitls.httphelper.Request;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -25,9 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class QuestionOpenedActivity extends BaseActivity {
     private TextView textTitle,textContent, textDate, textAuthor;
@@ -86,16 +86,16 @@ public class QuestionOpenedActivity extends BaseActivity {
                         put("images", "");
                         put("token", MainActivity.token);
                     }};
-                    MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapSend, new Callback() {
+                    Request request = new Request.Builder()
+                            .url(MainActivity.baseUrl+lastUrl)
+                            .method("POST")
+                            .hashMap(hashMapSend)
+                            .build();
+                    NetUtil.getInstance().execute(request, new CallBack() {
                         @Override
-                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        @Override
-                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        public void onResponse(String response) {
                             try {
-                                JSONObject jsonObject = new JSONObject(response.body().string());
+                                JSONObject jsonObject = new JSONObject(response);
                                 final String status =  jsonObject.getString("status");
                                 final String info = jsonObject.getString("info");
                                 runOnUiThread(new Runnable() {
@@ -115,6 +115,11 @@ public class QuestionOpenedActivity extends BaseActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        }
+
+                        @Override
+                        public void onFailed(Exception e) {
+                            e.printStackTrace();
                         }
                     });
                 }
@@ -149,16 +154,16 @@ public class QuestionOpenedActivity extends BaseActivity {
             put("token", MainActivity.token);
         }};
         answerList.clear();
-        MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapAnswer, new Callback() {
+        Request request = new Request.Builder()
+                .url(MainActivity.baseUrl+lastUrl)
+                .method("POST")
+                .hashMap(hashMapAnswer)
+                .build();
+        NetUtil.getInstance().execute(request, new CallBack() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(String response) {
                 try {
-                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    final JSONObject jsonObject = new JSONObject(response);
                     final String status = jsonObject.getString("status");
                     final String info = jsonObject.getString("info");
                     runOnUiThread(new Runnable() {
@@ -175,7 +180,7 @@ public class QuestionOpenedActivity extends BaseActivity {
                                         final String authorNameA = jsonAnswer.getString("authorName");
                                         final String avatarA = jsonAnswer.getString("authorAvatar");
                                         Answer answer = new Answer(contentA, dateA, authorNameA, avatarA);
-                                            answerList.add(answer);
+                                        answerList.add(answer);
                                     }
 //                                    Toast.makeText(QuestionOpenedActivity.this, "刷新成功！",
 //                                            Toast.LENGTH_SHORT).show();
@@ -192,23 +197,27 @@ public class QuestionOpenedActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
 
+            @Override
+            public void onFailed(Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
     private void sendAdd() {
         lastUrl = "favorite.php";
-        MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapFavorite, new Callback() {
+        Request request = new Request.Builder()
+                .url(MainActivity.baseUrl+lastUrl)
+                .method("POST")
+                .hashMap(hashMapFavorite)
+                .build();
+        NetUtil.getInstance().execute(request, new CallBack() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(String response) {
                 try {
-                    JSONObject object = new JSONObject(response.body().string());
+                    JSONObject object = new JSONObject(response);
                     final String status = object.getString("status");
                     if (status.equals("200")) {
                         runOnUiThread(new Runnable() {
@@ -224,23 +233,27 @@ public class QuestionOpenedActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
 
+            @Override
+            public void onFailed(Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
     private void sendCancel() {
         lastUrl = "cancelFavorite.php";
-        MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, hashMapFavorite, new Callback() {
+        Request request = new Request.Builder()
+                .url(MainActivity.baseUrl+lastUrl)
+                .method("POST")
+                .hashMap(hashMapFavorite)
+                .build();
+        NetUtil.getInstance().execute(request, new CallBack() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(String response) {
                 try {
-                    JSONObject object = new JSONObject(response.body().string());
+                    JSONObject object = new JSONObject(response);
                     final String status = object.getString("status");
                     if (status.equals("200")) {
                         runOnUiThread(new Runnable() {
@@ -256,6 +269,11 @@ public class QuestionOpenedActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                e.printStackTrace();
             }
         });
     }

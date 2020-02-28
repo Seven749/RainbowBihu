@@ -1,7 +1,6 @@
 package com.seven749.rainbowbihu.view;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,17 +13,12 @@ import com.seven749.rainbowbihu.uitls.DoubleClickExitHelper;
 import com.seven749.rainbowbihu.R;
 import com.seven749.rainbowbihu.uitls.httphelper.CallBack;
 import com.seven749.rainbowbihu.uitls.httphelper.NetUtil;
+import com.seven749.rainbowbihu.uitls.httphelper.Request;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG = "LoginActivity";
@@ -72,7 +66,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     // post login
                     postDate.put("username", username);
                     postDate.put("password", password);
-                    com.seven749.rainbowbihu.uitls.httphelper.Request request = new com.seven749.rainbowbihu.uitls.httphelper.Request.Builder().url(MainActivity.baseUrl+lastUrl).method("POST").hashMap(postDate).build();
+                    Request request = new Request.Builder().url(MainActivity.baseUrl+lastUrl).method("POST").hashMap(postDate).build();
                     NetUtil.getInstance().execute(request, new CallBack() {
                         @Override
                         public void onResponse(String response) {
@@ -84,7 +78,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                             e.printStackTrace();
                         }
                     });
-//                    sendRequest();
                 }
                 break;
             case R.id.to_register:
@@ -95,30 +88,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 break;
         }
     }
-    private void sendRequest() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("username", username)
-                            .add("password", password)
-                            .build();
-                    Request request = new Request.Builder()
-                            .url(MainActivity.baseUrl+lastUrl)
-                            .post(requestBody)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    parseJSON(responseData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
     private void parseJSON(String jsonData) {
         try {
             final JSONObject jsonObject = new JSONObject(jsonData);

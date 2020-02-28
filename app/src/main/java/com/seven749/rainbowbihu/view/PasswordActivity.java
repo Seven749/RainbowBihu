@@ -7,14 +7,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.uitls.httphelper.CallBack;
+import com.seven749.rainbowbihu.uitls.httphelper.NetUtil;
+import com.seven749.rainbowbihu.uitls.httphelper.Request;
 
 import org.json.JSONObject;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PasswordActivity extends BaseActivity {
 
@@ -22,6 +22,7 @@ public class PasswordActivity extends BaseActivity {
     private Button changeOk;
     private final static String lastUrl = "changePassword.php";
     private String oldPassword, newPassword, newPasswordA;
+    private Map<String, Object> postData = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +65,24 @@ public class PasswordActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("password", newPassword)
-                            .add("token", MainActivity.token)
-                            .build();
+                    postData.put("password", newPassword);
+                    postData.put("token", MainActivity.token);
                     Request request = new Request.Builder()
                             .url(MainActivity.baseUrl+lastUrl)
-                            .post(requestBody)
+                            .method("POST")
+                            .hashMap(postData)
                             .build();
-                    Response response = client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    parseJSON(responseData);
+                    NetUtil.getInstance().execute(request, new CallBack() {
+                        @Override
+                        public void onResponse(String response) {
+                            parseJSON(response);
+                        }
+
+                        @Override
+                        public void onFailed(Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

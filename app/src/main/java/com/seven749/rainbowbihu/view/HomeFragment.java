@@ -19,6 +19,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.seven749.rainbowbihu.uitls.MyUtil;
 import com.seven749.rainbowbihu.model.Question;
 import com.seven749.rainbowbihu.R;
+import com.seven749.rainbowbihu.uitls.httphelper.CallBack;
+import com.seven749.rainbowbihu.uitls.httphelper.NetUtil;
+import com.seven749.rainbowbihu.uitls.httphelper.Request;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -30,9 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 import static android.content.ContentValues.TAG;
 
@@ -90,22 +90,10 @@ public class HomeFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "请先登录！", Toast.LENGTH_SHORT).show();
         }
-//        nextPage = (TextView)view.findViewById(R.id.add_next);
-//        nextPage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                addNewPage();
-//            }
-//        });
-//        Log.d(TAG, "onCreateView: ");
         return view;
     }
 
     private void addNewPage() {
-        /* 随机数
-        final long l = System.currentTimeMillis();
-        final int i = (int) (l % 11);
-        */
         final int page;
         if (MainActivity.isCollection) {
             lastUrl = "getFavoriteList.php";
@@ -121,15 +109,20 @@ public class HomeFragment extends Fragment {
             put("count", 20);
             put("token", MainActivity.token);
         }};
-        MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, postData, new Callback() {
+        Request request = new Request.Builder()
+                .url(MainActivity.baseUrl + lastUrl)
+                .method("POST")
+                .hashMap(postData)
+                .build();
+        NetUtil.getInstance().execute(request, new CallBack() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
+            public void onResponse(String response) {
+                parseJSON(response);
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                parseJSON(response.body().string());
+            public void onFailed(Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -180,15 +173,20 @@ public class HomeFragment extends Fragment {
             lastUrl = "getQuestionList.php";
             questionList.clear();
         }
-        MyUtil.sendOkHttpUtil(MainActivity.baseUrl + lastUrl, postData, new Callback() {
+        Request request = new Request.Builder()
+                .url(MainActivity.baseUrl+lastUrl)
+                .method("POST")
+                .hashMap(postData)
+                .build();
+        NetUtil.getInstance().execute(request, new CallBack() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
+            public void onResponse(String response) {
+                parseJSON(response);
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                parseJSON(response.body().string());
+            public void onFailed(Exception e) {
+                e.printStackTrace();
             }
         });
     }
